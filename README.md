@@ -29,7 +29,7 @@ Things you may want to cover:
 |------|----|-------|
 |name|string|null: false, unique: true|
 |email|string|null: false, unique: true|
-|member_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
 
 ### Association
 - has_many :messages
@@ -42,7 +42,7 @@ Things you may want to cover:
 |------|----|-------|
 |name|string|null: false, unique: true|
 |email|string|null: false, unique: true|
-|member_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
 
 ### Association
 - has_many :messages
