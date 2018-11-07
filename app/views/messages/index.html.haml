@@ -1,0 +1,34 @@
+!!!
+%html{lang: "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    .notification
+      .notice
+    .chat-side
+      .chat-side__user
+        .chat-side__user-content
+          .chat-side__user-name
+          .chat-side__user--new-group
+          .chat-side__user--edit-user
+      .chat-side__groups
+        .chat-side__groups-list
+    .chat-main
+      .chat-main__header
+        .chat-main__header--group.clearfix
+          .chat-main__header--group-name
+          .chat-main__header--group-edit-btn
+        .chat-main__header-members
+      .chat-main__body
+        .chat-main__body--messages-list
+          .chat-main__message.clearfix
+            .chat-main__message-name
+            .chat-main__message-time
+            .chat-main__message-body
+              .chat-main__message-body-image
+      .chat-main__footer
+        %form.chat-main__footer-form
+          .chat-main__footer-body
+            %input.message
+            %label.chat-file
+          %input.submit
