@@ -10,11 +10,21 @@
     border: 1px solid #eeeeee;
     &--group {
       margin: 0 40px;
-    }
-    &--group-name {
-      font-size: 20px;
-      color: #333333;
-      margin: 35px 0 15px;
+      @include clearfix();
+      &-name {
+        font-size: 20px;
+        color: #333333;
+        margin: 35px 0 15px;
+        float: left;
+      }
+      &-edit-btn {
+        font-size: 16px;
+        color: $blue-color;
+        padding: 12px 20px;
+        margin: 28px 20px 0;
+        border: 1px solid $blue-color;
+        float: right
+      }
     }
   }
   &__header-members {
@@ -23,7 +33,7 @@
     margin: 0 40px;
   }
   &__body {
-    height: calc( 100vh - 15% - 90px );
+    height: calc( 100vh - 15% - 92px );
     &--messages-list {
       padding: 26px 40px 0;
     }
@@ -62,22 +72,22 @@
       position: relative;
       .message {
         height: 50px;
-        width: calc( 100% - 130px );
+        width: calc( 100% - 150px );
         padding: 0px 10px;
         margin: 20px 0;
         border: none;
       }
       .chat-file {
         height: 50px;
-        width: 40px
-        margin 20px 130px 20px 0;
+        width: 40px;
+        margin: 32px 130px 20px 0;
         position: absolute;
         top: 0;
         right: 0;
       }
     }
     .submit {
-      width: 80px;
+      width: 100px;
       height: 50px;
       margin: 20px 0;
       color: white;
