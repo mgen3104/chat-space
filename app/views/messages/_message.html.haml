@@ -1,11 +1,9 @@
-.message
-  .upper-message
-    .upper-message__user-name
-      = message.user.name
-    .upper-message__date
-      = format_posted_time(message.created_at)
-  .lower-meesage
-    - if message.content.present?
-      %p.lower-message__content
-        = message.content
-    = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+.chat-main__message
+  .chat-main__message-name
+    = message.user.name
+  .chat-main__message-time
+    = l message.created_at, format: :long
+  - if message.content.present?
+    %p.chat-main__message-body
+      = message.content
+  = image_tag message.image.url, class: 'lower-message__image' if message.image.present?

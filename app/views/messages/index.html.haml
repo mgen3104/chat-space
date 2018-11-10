@@ -23,31 +23,23 @@
 .chat-main
   .chat-main__header
     .chat-main__header--group
-      .chat-main__header--group-name  group1
+      .chat-main__header--group-name
+        = @group.name
       .chat-main__header--group-edit-btn  edit
-    .chat-main__header-members  MEMBER:satoshi
+    .chat-main__header-members
+      Member :
+      - @group.users.each do |user|
+        = user.name
   .chat-main__body
     .chat-main__body--messages-list
-      .chat-main__message
-        .chat-main__message-name  matsumoto
-        .chat-main__message-time  2018/11/07 11:00
-        .chat-main__message-body  testtesttesttest
-      .chat-main__message
-        .chat-main__message-name  satoshi
-        .chat-main__message-time  2018/11/07 12:00
-        .chat-main__message-body  testtesttesttest
+      = render @messages
   .chat-main__footer
-    %form.chat-main__footer-form
+    .chat-main__footer-form
       .chat-main__footer-body
-        %input.message{:placeholder => "type a message"}
-        %label.chat-file
-          %i.fa.fa-image
-      %input.submit{:type => "submit", :value => "Send"}
-    .form
-      = form_for [@group, @message] do |f|
-        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
-        .form__mask
-          = f.label :image, class: 'form__mask__image' do
-            = fa_icon 'picture-o', class: 'icon'
-            = f.file_field :image, class: 'hidden'
-        = f.submit 'Send', class: 'form__submit'
+        = form_for [@group, @message] do |f|
+          = f.text_field :content, class: 'message', placeholder: 'type a message'
+          .chat-file
+            = f.label :image do
+              = fa_icon 'picture-o', class: 'icon'
+              = f.file_field :image, class: 'hidden', style: "display:none;"
+          = f.submit 'Send', class: 'submit'
