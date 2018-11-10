@@ -23,9 +23,13 @@
 .chat-main
   .chat-main__header
     .chat-main__header--group
-      .chat-main__header--group-name  group1
+      .chat-main__header--group-name
+        = @group.name
       .chat-main__header--group-edit-btn  edit
-    .chat-main__header-members  MEMBER:satoshi
+    .chat-main__header-members
+      Member :
+      - @group.users.each do |user|
+        = user.name
   .chat-main__body
     .chat-main__body--messages-list
       = render @messages
