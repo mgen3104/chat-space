@@ -1,23 +1,19 @@
 $(function(){
   function buildHTML(message){
     var html = `
-                .chat-main__message
-                  .chat-main__message-name
-                    = ${message.user_name}
-                  .chat-main__message-time
-                    = l message.created_at, format: :long
-                  - if message.content.present?
-                    %p.chat-main__message-body
-                      = ${message.content}
-                  = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+                  <div class="chat-main__message">
+                    <div class="chat-main__message-name">${message.user_name}</div>
+                    <div class="chat-main__message-time">${message.created_at}</div>
+                    <p class="chat-main__message-body">${message.content}</p>%
+                    <img class="lower-message__image" src=${message.image}>
+                  </div>
                 `
     return html;
   }
-  $('#new_message').on('submit', function(e){
+  $('#new_message').on("submit", function(e){
     e.preventDefault();
-    console.log(this)
     var formData = new FormData(this);
-    var href = '/groups/' + ${message.group_id} + '/messages'
+    var href = window.location.href
     $.ajax({
       url: href,
       type: "POST",
@@ -28,7 +24,7 @@ $(function(){
     })
     .done(function(data){
       var html = buildHTML(data);
-      $('.message').append(html)
+      $('.new_message').append(html)
       $('.message').val('')
     })
     .fail(function(){
