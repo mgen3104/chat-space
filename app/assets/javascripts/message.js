@@ -31,6 +31,7 @@ $(function(){
       $('.chat-main__body--messages-list').append(html)
       $('.message').val('')
       $('#message_image').val('')
+      $('.chat-main__body').animate({scrollTop: $('.chat-main__body')[0].scrollHeight}, 'fast')
     })
     .fail(function(){
       alert('error');
