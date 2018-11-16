@@ -14,18 +14,23 @@ $(function(){
     e.preventDefault();
     var formData = new FormData(this);
     var href = window.location.href
+    var $button = $(this).find('.submit');
     $.ajax({
       url: href,
       type: "POST",
       data: formData,
       dataType: 'json',
       processData: false,
-      contentType: false
+      contentType: false,
+      complete: function(e) {
+        $button.attr('disabled', false);
+      },
     })
     .done(function(data){
       var html = buildHTML(data);
       $('.chat-main__body--messages-list').append(html)
       $('.message').val('')
+      $('#message_image').val('')
     })
     .fail(function(){
       alert('error');
