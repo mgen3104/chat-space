@@ -5,7 +5,7 @@ $(function(){
                   <div class="chat-main__message-name">${message.user_name}</div>
                   <div class="chat-main__message-time">${message.created_at}</div>
                   <p class="chat-main__message-body">${message.content}</p>
-                  <img class="lower-message__image" src=${message.image} width="128">
+                  <img class="lower-message__image" src=${message.image} onerror="this.style.display='none'" width="128">
                 </div>
                 `
     return html;
