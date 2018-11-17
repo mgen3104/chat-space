@@ -3,23 +3,23 @@
 .chat-side
   .chat-side__user
     .chat-side__user-content
-      .chat-side__user-name  matsumoto
+      .chat-side__user-name
+        = current_user.name
       .chat-side__user--new-group
         = link_to new_group_path do
           %i.fa.fa-pencil-square-o
       .chat-side__user--edit-user
-        = link_to do
+        = link_to edit_user_path(current_user) do
           %i.fa.fa-cog
   .chat-side__groups
     .chat-side__groups-list
-      %a
+      - current_user.groups.each do |group|
         .chat-side__group
-          .chat-side__group-name  test1
-          .chat-side__group-message  nanananana
-      %a
-        .chat-side__group
-          .chat-side__group-name  test2
-          .chat-side__group-message  gagagagaga
+          = link_to group_messages_path(group) do
+            .chat-side__group-name
+              = group.name
+            .chat-side__group-message
+              = group.show_last_message
 .chat-main
   .chat-main__header
     .chat-main__header--group
