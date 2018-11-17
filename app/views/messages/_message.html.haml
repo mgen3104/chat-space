@@ -3,7 +3,7 @@
     = message.user.name
   .chat-main__message-time
     = l message.created_at, format: :long
-  - if message.content.present?
-    %p.chat-main__message-body
-      = message.content
-  = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+  %p.chat-main__message-body
+    = message.content if message.content.present?
+  .chat-main__message-body
+    = image_tag message.image.url, width: 128, class: 'lower-message__image' if message.image.present?
