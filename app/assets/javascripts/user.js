@@ -14,21 +14,20 @@ function appendUser(user) {
 
   function appendNoUser(user) {
     var html = `<li>
-                  <div class='listview__element--right-icon'>${ product }</div>
+                  <div class='listview__element--right-icon'>${ user }</div>
                 </li>`
     search_list.append(html);
   }
 
   $("#user-search-field").on("keyup", function(e) {
-    var input = $("#user-search-field").val();
+    e.preventDefault();
+    var input = $.trim($("#user-search-field").val());
 
     $.ajax({
       type: 'GET',
-      url: '/groups/new',
+      url: '/users',
       data: { keyword: input },
-      dataType: 'json',
-      processData: false,
-      contentType: false
+      dataType: 'json'
     })
 
     .done(function(users) {
