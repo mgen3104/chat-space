@@ -14,10 +14,21 @@ $(document).on('turbolinks:load', function() {
     }
 
     function appendNoUser(user) {
-      var html = `<li>
-                    <div class='listview__element--right-icon'>${ user }</div>
-                  </li>`
+      var html = `
+                  <div>${ user }</div>
+                  `
       search_list.append(html);
+    }
+
+    function addUser(id, name){
+      var html = `
+                  <div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+                    <input name='group[user_ids][]' type='hidden' value='${id}'>
+                    <p class='chat-group-user__name'>${name}</p>
+                     <a class="user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn" data-user-id=${id} data-user-name=${name}>削除</a>
+                  </div>
+                  `
+      return html;
     }
 
     $("#user-search-field").on("keyup", function(e) {
@@ -43,8 +54,43 @@ $(document).on('turbolinks:load', function() {
         }
       })
       .fail(function() {
-        console.log('error');
+        alert('error');
       })
+    });
+
+    $(document).on("click", ".user-search-add", function(e){
+      var input = $.trim($("#user-search-field").val());
+      var html = $(this).parent();
+      var user_id = $(this).data('user-id')
+      var user_name = $(this).data('user-name')
+      html.remove()
+      addhtml = addUser(user_id, user_name)
+      $('#chat-group-users').append(addhtml)
+
+      // $.ajax({
+      //   type: 'GET',
+      //   url: '/users',
+      //   data: { keyword: input },
+      //   dataType: 'json'
+      // })
+
+      // .done(function(users) {
+      //   users.forEach(function(user){
+      //     var member = user.findIndex(({id}) => id === user_id)
+      //     console.log(user)
+      //   })
+      // })
+      // .fail(function() {
+      //   alert('error');
+      // })
+    });
+
+    $(document).on("click", ".user-search-remove", function(e){
+      var html = $(this).parent();
+      console.log(html)
+      var user_id = $(this).data('user-id')
+      var user_name = $(this).data('user-name')
+      html.remove()
     });
   });
 })
