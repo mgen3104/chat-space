@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function() {
     $('#new_message').on("submit", function(e){
       e.preventDefault();
       var formData = new FormData(this);
-      var href = window.location.href
+      var href = window.location.href;
       var button = $(this).find('.submit');
       $.ajax({
         url: href,
