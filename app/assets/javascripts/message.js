@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   $(function(){
     function buildHTML(message){
       var html = `
-                  <div class="chat-main__message">
+                  <div class="chat-main__message" data-message-id="${message.id}">
                     <div class="chat-main__message-name">${message.user_name}</div>
                     <div class="chat-main__message-time">${message.created_at}</div>
                     <p class="chat-main__message-body">${message.content}</p>
@@ -39,41 +39,29 @@ $(document).on('turbolinks:load', function() {
       })
     })
 
-    function buildMESSAGE(message){
-      var html = `
-                  <div class="chat-main__message" data-message-id="${message.id}">
-                    <div class="chat-main__message-name">${message.user_name}</div>
-                    <div class="chat-main__message-time">${message.created_at}</div>
-                    <p class="chat-main__message-body">${message.content}</p>
-                    <img class="lower-message__image" src=${message.image} onerror="this.style.display='none'" width="128">
-                  </div>
-                  `
-      return html;
-    }
-
     $(function(){
-      setInterval(update, 5000);
-      //10000ミリ秒ごとにupdateという関数を実行する
+      setInterval(update, 3000);
     });
-    function update(){ //この関数では以下のことを行う
-      if($('.chat-main__message')[0]){ //もし'messages'というクラスがあったら
-        var message_id = $('.chat-main__message:last').data('message-id'); //一番最後にある'messages'というクラスの'id'というデータ属性を取得し、'message_id'という変数に代入
-      } else { //ない場合は
-        var message_id = 0 //0を代入
+    function update(){
+      if($('.chat-main__message')[0]){
+        var message_id = $('.chat-main__message:last').data('message-id');
       }
-      $.ajax({ //ajax通信で以下のことを行う
-        url: window.location.href, //urlは現在のページを指定
-        type: 'GET', //メソッドを指定
-        data: { message: { id: message_id } //このような形(paramsの形をしています)で、'id'には'message_id'を入れる
+      else {
+        var message_id = 0
+      }
+      $.ajax({
+        url: window.location.href,
+        type: 'GET',
+        data: { message: { id: message_id }
         },
-        dataType: 'json' //データはjson形式
+        dataType: 'json'
       })
-      .done(function(data){ //通信したら、成功しようがしまいが受け取ったデータ（@new_message)を引数にとって以下のことを行う
+      .done(function(data){
         var id = $('.chat-main__message').data('message-id');
         var insertHTML = '';
-        $.each(data, function(i, data){ //'data'を'data'に代入してeachで回す
+        $.each(data, function(i, data){
           if (message_id > id ) {
-            insertHTML += buildMESSAGE(data); //buildMESSAGEを呼び出す
+            insertHTML += buildHTML(data);
           }
         });
         $('.chat-main__body--messages-list').append(insertHTML)
