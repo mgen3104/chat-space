@@ -16,6 +16,10 @@ $(document).on('turbolinks:load', function() {
       var formData = new FormData(this);
       var href = window.location.href;
       var button = $(this).find('.submit');
+      if (($('input[type=text]').val() == '') && ($('input[type=file]').val() == '')) {
+        alert('error');
+        return false;
+      }
       $.ajax({
         url: href,
         type: "POST",
