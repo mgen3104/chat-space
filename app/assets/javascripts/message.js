@@ -12,10 +12,6 @@ $(document).on('turbolinks:load', function() {
       return html;
     }
     $('#new_message').on("submit", function(e){
-      if ($('input[type=text]').val() == '') {
-        alert('error');
-        return false;
-      }
       e.preventDefault();
       var formData = new FormData(this);
       var href = window.location.href;
